@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gráfico em JavaScript</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <canvas id="myChart" width="300" height="200"></canvas>
+
+    <script>
+        // Função para calcular f(x)
+        function f(x) {
+            return -3/4 * x**2 + 6*x;
+        }
+
+        // Valores de x e y para a circunferência completa
+        let xValues = Array.from({ length: 500 }, (_, i) => i / 500 * 10); // Ajuste o valor máximo para 10 ou o valor desejado
+        let yValues = xValues.map(x => f(x));
+
+        // Configuração do gráfico
+        let ctx = document.getElementById('myChart').getContext('2d');
+        let myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: xValues,
+                datasets: [{
+                    label: 'f(x) = -3/4 * x^2 + 6x',
+                    data: yValues,
+                    borderColor: 'red',
+                    borderWidth: 2,
+                    fill: true,
+                    backgroundColor: 'green',
+                    alpha: 0.3
+                }]
+            },
+            options: {
+                scales: {
+                    x: {
+                        type: 'linear',
+                        position: 'bottom',
+                        max: 10 // Ajuste o valor máximo para 10 ou o valor desejado
+                    },
+                    y: {
+                        min: 0
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
